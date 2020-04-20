@@ -67,7 +67,7 @@ resource "vcd_org_vdc" "vdc-name" {
     }
   }
   storage_profile {
-    name     = "Development1"
+    name     = "vSAN HOL Policy"
     limit    = 10240
     default  = true    
   }
@@ -92,7 +92,7 @@ resource "vcd_edgegateway" "egw" {
   external_network {
     name = "External Network"
     subnet {
-      ip_address            = "192.168.110.20"
+      ip_address            = "192.168.100.20"
       gateway               = "192.168.100.1"
       netmask               = "255.255.255.0"
       use_for_default_route = true
