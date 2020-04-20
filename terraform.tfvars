@@ -2,7 +2,7 @@
  
 vcd_user = "administrator"
 vcd_pass = "VMware1!"
-vcd_url = "https://vcd-01a.crop.local/"
+vcd_url = "https://vcd-01a.corp.local/"
 vcd_max_retry_timeout = "60"
 vcd_allow_unverified_ssl = "true"
 org_name = "T3"
