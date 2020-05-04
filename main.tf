@@ -46,7 +46,7 @@ description = "a new org admin"
 role = "Organization Administrator"
 password = "change-me"
 enabled = true
-email_address = "avnish@t3company.org"
+email_address = "admin@corp.local"
 depends_on = [vcd_org.org-name]
 }
 
