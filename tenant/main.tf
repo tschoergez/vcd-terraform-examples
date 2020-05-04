@@ -263,47 +263,70 @@ resource "vcd_lb_virtual_server" "lb_virtual_server" {
   }
 }
 
-resource "vcd_firewall_rules" "demo-fw" {
-  edge_gateway   = "${var.edge_gateway}"
-  default_action = "drop"
 
-  rule {
-    description      = "allow-web"
-    policy           = "allow"
-    protocol         = "tcp"
-    destination_port = "${vcd_lb_virtual_server.lb_virtual_server.port}"
-    destination_ip   = "${vcd_lb_virtual_server.lb_virtual_server.ip_address}"
-    source_port      = "any"
-    source_ip        = "any"
+
+resource "vcd_nsxv_firewall_rule" "my-rule-1" {
+  org          = var.org_name
+  vdc          = var.org_vdc
+  edge_gateway = var.edge_gateway
+
+  source {
+    ip_addresses = ["any"]
   }
 
-  rule {
-    description      = "allow-app"
-    policy           = "allow"
-    protocol         = "tcp"
-    destination_port = "${vcd_dnat.demo_dnat_app_rest.port}"
-    destination_ip   = "${var.edge_gateway_ip}"
-    source_port      = "any"
-    source_ip        = "any"
+  destination {
+    ip_addresses = ["any"]
   }
 
-  rule {
-    description      = "allow-app"
-    policy           = "allow"
-    protocol         = "tcp"
-    destination_port = "${vcd_dnat.demo_dnat_app_ssh.port}"
-    destination_ip   = "${var.edge_gateway_ip}"
-    source_port      = "any"
-    source_ip        = "any"
-  }
-
-  rule {
-    description      = "allow-app-outbound"
-    policy           = "allow"
-    protocol         = "any"
-    destination_port = "any"
-    destination_ip   = "any"
-    source_port      = "any"
-    source_ip        = "${vcd_vapp_vm.demo_vm_app.network.0.ip}"
+  service {
+    protocol = "any"
   }
 }
+
+
+
+# For non-advanced edge gateway
+# resource "vcd_firewall_rules" "demo-fw" {
+#   edge_gateway   = "${var.edge_gateway}"
+#   default_action = "drop"
+
+#   rule {
+#     description      = "allow-web"
+#     policy           = "allow"
+#     protocol         = "tcp"
+#     destination_port = "${vcd_lb_virtual_server.lb_virtual_server.port}"
+#     destination_ip   = "${vcd_lb_virtual_server.lb_virtual_server.ip_address}"
+#     source_port      = "any"
+#     source_ip        = "any"
+#   }
+
+#   rule {
+#     description      = "allow-app"
+#     policy           = "allow"
+#     protocol         = "tcp"
+#     destination_port = "${vcd_dnat.demo_dnat_app_rest.port}"
+#     destination_ip   = "${var.edge_gateway_ip}"
+#     source_port      = "any"
+#     source_ip        = "any"
+#   }
+
+#   rule {
+#     description      = "allow-app"
+#     policy           = "allow"
+#     protocol         = "tcp"
+#     destination_port = "${vcd_dnat.demo_dnat_app_ssh.port}"
+#     destination_ip   = "${var.edge_gateway_ip}"
+#     source_port      = "any"
+#     source_ip        = "any"
+#   }
+
+#   rule {
+#     description      = "allow-app-outbound"
+#     policy           = "allow"
+#     protocol         = "any"
+#     destination_port = "any"
+#     destination_ip   = "any"
+#     source_port      = "any"
+#     source_ip        = "${vcd_vapp_vm.demo_vm_app.network.0.ip}"
+#   }
+# }
