@@ -3,10 +3,10 @@
 
 # Connection for the VMware vCloud Director Provider
 provider "vcd" {
-  url      = "https://${var.vcd_host}/api"
-  user     = "demo-org-admin"
-  password = "${var.org_pass}"
-  org      = "demo-org"
+  url      = "${var.vcd_url}"
+  user     = "${var.vcd_user}"
+  password = "${var.vcd_pass}"
+  org      = "${var.org_name}"
   vdc      = "demo-vdc"
 
   max_retry_timeout    = "120"
@@ -17,15 +17,15 @@ provider "vcd" {
 
 # Common variables
 variable "edge_gateway" {
-  default = "demo-gw"
+  default = "T1-ESG"
 }
 
 variable "edge_gateway_ip" {
-  default = "10.150.211.101" # IP address of edge gateway uplink interface
+  default = "192.168.100.3" # IP address of edge gateway uplink interface
 }
 
 # Result is a three-network-tier application:
-# 1. Web page on http://10.150.211.101
+# 1. Web page on http://192.168.100.3
 # 2. Above page calling a "REST" application
 # 3. Above "REST" application calling a "database" server
 
@@ -44,7 +44,7 @@ resource "vcd_catalog_item" "demo_linux" {
   name        = "Linux"
   description = "Linux VM"
 
-  ova_path = "/Users/lvirbalas/OVAs/photon-hw11-3.0-26156e2.ova"
+  ova_path = "c:/photon-hw11-3.0-26156e2.ova"
 
   show_upload_progress = true
 }
