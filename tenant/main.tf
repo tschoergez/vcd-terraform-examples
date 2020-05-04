@@ -1,13 +1,29 @@
 # Create a catalog, opload photon ovs, create a new vApp
 # Photon OVA URL: http://dl.bintray.com/vmware/photon/3.0/GA/ova/photon-hw11-3.0-26156e2.ova ,download to local system
 
+variable "vcd_user" {
+    description = "vCloud user"
+}
+variable "vcd_pass" {
+    description = "vCloud pass"
+}
+variable "vcd_allow_unverified_ssl" {
+    default = true
+}
+variable "vcd_url" {}
+variable "org_name" {}
+variable "org_vdc" {}
+variable "vcd_max_retry_timeout" {
+    default = 60
+}
+
 # Connection for the VMware vCloud Director Provider
 provider "vcd" {
-  url      = "${var.vcd_url}"
-  user     = "${var.vcd_user}"
-  password = "${var.vcd_pass}"
-  org      = "${var.org_name}"
-  vdc      = "demo-vdc"
+  url      = var.vcd_url
+  user     = var.vcd_user
+  password = var.vcd_pass
+  org      = var.org_name
+  vdc      = var.org_vdc
 
   max_retry_timeout    = "120"
   allow_unverified_ssl = "true"
@@ -40,7 +56,7 @@ resource "vcd_catalog" "demo_catalog" {
 
 # Linux OVA
 resource "vcd_catalog_item" "demo_linux" {
-  catalog     = "${vcd_catalog.demo_catalog.name}"
+  catalog     = vcd_catalog.demo_catalog.name
   name        = "Linux"
   description = "Linux VM"
 
