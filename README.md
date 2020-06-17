@@ -8,3 +8,6 @@ deploys the template multiple times (to mimic the different components of the Ap
 on the Org Network Edge Gateway.
 
 To use them, adjust the connection settings (in terraform.tfvars files) and the object names in the .tf files to match your environment.
+
+For more details, read the documentation on
+https://www.terraform.io/docs/providers/vcd/index.html
