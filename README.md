@@ -1,4 +1,8 @@
-# Beyond Networking Automation with VCD, NSX-T and Terraform
+# Examples for the Terraform Provider for VMware Cloud Director (VCD)
+
+This repository contains examples for the Terraform Provider for VMware Cloud Director. Main content is merged from a demo from Empower 2022, original repository is https://github.com/cloudmaniac/terraform-empower-2022 (Thanks to Romain :-) ).
+
+## Beyond Networking Automation with VCD, NSX-T and Terraform
 
 Welcome! \o/
 
@@ -20,8 +24,3 @@ For more details, read the Terraform provider documentation:
 * [VMware Cloud Director Terraform Provider](https://registry.terraform.io/providers/vmware/vcd)
 * [NSX-T Terraform Provider](https://registry.terraform.io/providers/vmware/nsxt)
 * [NSX Advanced Load Balancer (Avi) Terraform Provider](https://registry.terraform.io/providers/vmware/avi)
-
-## Considerations
-
-* As of May 2022, the VMware Cloud Director Terraform provider do not support [data center groups](https://registry.terraform.io/providers/vmware/vcd/latest/docs/guides/vdc_groups) for all NSX-T edge gateway child resources. It should be fixed soon; [PR #841](https://github.com/vmware/terraform-provider-vcd/pull/841) tracks this effort.
-* For the sake of time, I create empty VMs in the demo #3. However, it's easy to upload an OVA (or an ISO) and build vApps and VMs with it.
